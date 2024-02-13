@@ -23,56 +23,139 @@ using namespace std;
 //	}	return true;
 //}
 
-bool AuditCorect2(char str[]) {
-	int open1 = 0, close1 = 0, open2 = 0, close2 = 0;	
-	for (int i = 0; i < strlen(str); i++) {
+//bool AuditCorect2(char str[]) {
+//	int open1 = 0, close1 = 0, open2 = 0, close2 = 0;	
+//	for (int i = 0; i < strlen(str); i++) {
+//		if (str[i] == '(') {
+//			open1++;
+//		}		
+//		if (str[i] == '[') {
+//			open2++;
+//		}		
+//		if (str[i] == ')') {
+//			close1++;			
+//			if (open1 == 0) {
+//				return false;
+//			}
+//		}		if (str[i] == ']') {
+//			close2++;			
+//			if (open2 == 0) {
+//				return false;
+//			}
+//		}
+//	}
+//	if ((open1 + close1) % 2 != 0) {
+//		return false;
+//	}
+//	if ((open2 + close2) % 2 != 0) {
+//		return false;
+//	}
+//	int couple = 0, a = 0;
+//	for (int i = 0; i < strlen(str); i++) {
+//		if (str[i] == '(') {
+//			for (int j = i + 1; j < strlen(str); j++) {
+//				if (str[j] == '(') {
+//					a++;					
+//					couple++;
+//				}				
+//				if (str[j] == ')') {
+//					if (a == 0) {
+//						break;
+//					}					
+//					a--;
+//					couple++;
+//				}
+//				if (str[j] == '[' || str[j] == ']') {
+//					couple++;
+//				}
+//			}
+//			if (couple % 2 != 0) {
+//				return false;
+//			}
+//		}
+//		couple = 0; a = 0;
+//		if (str[i] == '[') {
+//			for (int j = i + 1; j < strlen(str); j++) {
+//				if (str[j] == '[') {
+//					a++;
+//					couple++;
+//				}
+//				if (str[j] == ']') {
+//					if (a == 0) {
+//						break;
+//					}
+//					a--;					
+//					couple++;
+//				}				
+//				if (str[j] == '(' || str[j] == ')') {
+//					couple++;
+//				}
+//			}
+//			if (couple % 2 != 0) {
+//				return false;
+//			}
+//		}
+//	}	return true;
+//}
+
+bool AuditCorect3(char str[]) {	
+	int open1 = 0, close1 = 0, open2 = 0, close2 = 0, open3 = 0, close3 = 0;
+	for (int i = 0; i < strlen(str); i++) {		
 		if (str[i] == '(') {
-			open1++;
-		}		
-		if (str[i] == '[') {
+			open1++;		}
+		if (str[i] == '[') {			
 			open2++;
-		}		
+		}
+		if (str[i] == '{') {
+			open3++;
+		}
 		if (str[i] == ')') {
-			close1++;			
+			close1++;
 			if (open1 == 0) {
 				return false;
 			}
-		}		if (str[i] == ']') {
-			close2++;			
-			if (open2 == 0) {
-				return false;
-			}
 		}
-	}
-	if ((open1 + close1) % 2 != 0) {
+		if (str[i] == ']') {
+			close2++;
+			if (open2 == 0) {				
+				return false;
+			}		}
+		if (str[i] == '}') {		
+			close3++;
+			if (open3 == 0) {
+				return false;		
+			}
+		}	}
+	if ((open1 + close1) % 2 != 0) {		
+		return false;
+	}	if ((open2 + close2) % 2 != 0) {
+		return false;	}
+	if ((open3 + close3) % 2 != 0) {		
 		return false;
 	}
-	if ((open2 + close2) % 2 != 0) {
-		return false;
-	}
-	int couple = 0, a = 0;
+	int couple = 0, a = 0;	
 	for (int i = 0; i < strlen(str); i++) {
-		if (str[i] == '(') {
+		if (str[i] == '(') {			
 			for (int j = i + 1; j < strlen(str); j++) {
-				if (str[j] == '(') {
-					a++;					
-					couple++;
-				}				
-				if (str[j] == ')') {
+				if (str[j] == '(') {					
+					a++;
+					couple++;				
+				}
+				if (str[j] == ')') {					
 					if (a == 0) {
-						break;
-					}					
-					a--;
+						break;					
+					}
+					a--;					
 					couple++;
+				}			
+				if (str[j] == '[' || str[j] == ']' ||  str[j]=='{' || str[j]=='}') {
+					couple++;			
 				}
-				if (str[j] == '[' || str[j] == ']') {
-					couple++;
-				}
-			}
+			}		
 			if (couple % 2 != 0) {
-				return false;
+				return false;			
 			}
-		}
+		}	
 		couple = 0; a = 0;
 		if (str[i] == '[') {
 			for (int j = i + 1; j < strlen(str); j++) {
@@ -82,12 +165,12 @@ bool AuditCorect2(char str[]) {
 				}
 				if (str[j] == ']') {
 					if (a == 0) {
-						break;
+						break;					
 					}
-					a--;					
+					a--;
 					couple++;
-				}				
-				if (str[j] == '(' || str[j] == ')') {
+				}
+				if (str[j] == '(' ||  str[j] == ')' ||  str[j] == '{' || str[j] == '}') {
 					couple++;
 				}
 			}
@@ -95,14 +178,36 @@ bool AuditCorect2(char str[]) {
 				return false;
 			}
 		}
-	}	return true;
+		if (str[i] == '{') {
+			for (int j = i + 1; j < strlen(str); j++) {
+				if (str[j] == '{') {
+					a++;
+					couple++;
+				}
+				if (str[j] == '}') {
+					if (a == 0) {
+						break;
+					}
+					a--;
+					couple++;
+				}
+				if (str[j] == '(' ||  str[j] == ')' || str[j] == '[' || str[j] == ']') {
+					couple++;
+				}
+			}
+			if (couple % 2 != 0) {
+				return false;
+			}
+		}
+	}
+	return true;
 }
 
 int main()
 {
 	char arr[50]; 
 	cin.getline(arr, 50);
-	bool a = AuditCorect2(arr); 
+	bool a = AuditCorect3(arr); 
 	cout << a;
 
 }

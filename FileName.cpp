@@ -22,7 +22,8 @@ bool AuditCorect1(char str[]) {
 
 int main()
 {
-	char arr[50]; cin >> arr;
+	char arr[50]; 
+	cin.getline(arr, 50);
 	bool a = AuditCorect1(arr); 
 	cout << a;
 
